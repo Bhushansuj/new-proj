@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <title>Testcenter Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="container">
+
+    <h1>🖥️ Testcenter Monitoring</h1>
+
+    <!-- STATISTICS -->
+    <div class="stats">
+        <div class="card online">
+            <h2 id="onlineCount">0</h2>
+            <p>Online</p>
+        </div>
+
+        <div class="card offline">
+            <h2 id="offlineCount">0</h2>
+            <p>Offline</p>
+        </div>
+
+        <div class="card total">
+            <h2 id="totalCount">0</h2>
+            <p>Total</p>
+        </div>
+    </div>
+
+    <!-- TABLE -->
+    <table>
+        <thead>
+            <tr>
+                <th>Hostname</th>
+                <th>IP</th>
+                <th>Status</th>
+                <th>Last Seen</th>
+            </tr>
+        </thead>
+        <tbody id="table"></tbody>
+    </table>
+
+</div>
+
+<script src="script.js"></script>
+
+</body>
+</html>

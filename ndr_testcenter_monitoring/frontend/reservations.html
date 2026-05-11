@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reservierungen - NDR Testcenter Monitoring</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<aside class="sidebar">
+    <h2>NDR</h2>
+    <p>Testcenter Monitoring</p>
+    <nav>
+        <a href="index.html">Dashboard</a>
+        <a href="systems.html">Systeme</a>
+        <a href="reservations.html" class="active">Reservierungen</a>
+        <a href="users.html">Benutzer</a>
+        <a href="#" onclick="logout()">Logout</a>
+    </nav>
+</aside>
+
+<main class="main">
+    <header>
+        <div>
+            <h1>Reservierungen</h1>
+            <p>Übersicht und Verwaltung der Systemreservierungen</p>
+        </div>
+        <div class="header-actions">
+            <button onclick="toggleTheme()">Dark Mode</button>
+        </div>
+    </header>
+
+    <section class="table-section">
+        <div class="table-header">
+            <h2>Aktive Reservierungen</h2>
+        </div>
+
+        <div class="table-scroll">
+            <table>
+                <thead>
+                    <tr>
+                        <th>System</th>
+                        <th>Benutzer</th>
+                        <th>Von</th>
+                        <th>Bis</th>
+                        <th>Zweck</th>
+                        <th>Löschen</th>
+                    </tr>
+                </thead>
+                <tbody id="reservationsTable">
+                    <tr>
+                        <td colspan="6">Reservierungen werden über die API bereitgestellt.</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+</main>
+
+<script src="app.js"></script>
+</body>
+</html>

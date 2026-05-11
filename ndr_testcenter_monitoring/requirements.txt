@@ -1,0 +1,8 @@
+fastapi
+uvicorn
+mysql-connector-python
+python-dotenv
+python-jose
+passlib[bcrypt]
+requests
+openpyxl

@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Systeme - NDR Testcenter Monitoring</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<aside class="sidebar">
+    <h2>NDR</h2>
+    <p>Testcenter Monitoring</p>
+    <nav>
+        <a href="index.html">Dashboard</a>
+        <a href="systems.html" class="active">Systeme</a>
+        <a href="reservations.html">Reservierungen</a>
+        <a href="users.html">Benutzer</a>
+        <a href="#" onclick="logout()">Logout</a>
+    </nav>
+</aside>
+
+<main class="main">
+    <header>
+        <div>
+            <h1>Systeme</h1>
+            <p>Verwaltung aller PCs, Laptops und VMs im Testcenter</p>
+        </div>
+
+        <div class="header-actions">
+            <button onclick="toggleTheme()">Dark Mode</button>
+            <button onclick="exportSystemsCsv()">Export CSV</button>
+            <button onclick="checkStatus()">Status prüfen</button>
+        </div>
+    </header>
+
+    <section class="table-section admin-only">
+        <div class="table-header">
+            <h2>System hinzufügen</h2>
+        </div>
+
+        <form class="system-form" onsubmit="addSystem(event)">
+            <input id="newHostname" type="text" placeholder="Hostname" required>
+            <input id="newMacAddress" type="text" placeholder="MAC-Adresse">
+            <input id="newOsVersion" type="text" placeholder="OS">
+            <input id="newModel" type="text" placeholder="Modell">
+            <input id="newLocation" type="text" placeholder="Standort">
+            <select id="newSystemType">
+                <option value="PC">PC</option>
+                <option value="Laptop">Laptop</option>
+                <option value="VM">VM</option>
+            </select>
+            <button type="submit">Hinzufügen</button>
+        </form>
+    </section>
+
+    <section class="table-section">
+        <div class="table-header">
+            <h2>Inventar und Nutzung</h2>
+            <input type="text" id="searchInput" placeholder="System suchen..." onkeyup="filterSystems()">
+        </div>
+
+        <div class="table-scroll">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Hostname</th>
+                        <th>MAC-Adresse</th>
+                        <th>OS</th>
+                        <th>Modell</th>
+                        <th>Standort</th>
+                        <th>Power</th>
+                        <th>Status</th>
+                        <th>Aktion</th>
+                        <th class="admin-only">Bearbeiten</th>
+                        <th class="admin-only">Löschen</th>
+                        <th>Details</th>
+                    </tr>
+                </thead>
+                <tbody id="systemsTable"></tbody>
+            </table>
+        </div>
+    </section>
+</main>
+
+<div id="reservationModal" class="modal hidden">
+    <form class="modal-content" onsubmit="submitReservation(event)">
+        <h2>System reservieren</h2>
+        <input type="hidden" id="reservationSystemId">
+
+        <label for="reservationUntil">Reserviert bis</label>
+        <input id="reservationUntil" type="datetime-local" required>
+
+        <label for="reservationPurpose">Zweck</label>
+        <input id="reservationPurpose" type="text" placeholder="z. B. Softwaretest" required>
+
+        <div class="modal-actions">
+            <button type="button" class="secondary-btn" onclick="closeReservationModal()">Abbrechen</button>
+            <button type="submit">Reservieren</button>
+        </div>
+    </form>
+</div>
+
+<div id="editSystemModal" class="modal hidden">
+    <form class="modal-content wide-modal" onsubmit="submitSystemEdit(event)">
+        <h2>System bearbeiten</h2>
+        <input type="hidden" id="editSystemId">
+
+        <label for="editHostname">Hostname</label>
+        <input id="editHostname" type="text" required>
+
+        <label for="editSystemType">Typ</label>
+        <select id="editSystemType">
+            <option value="PC">PC</option>
+            <option value="Laptop">Laptop</option>
+            <option value="VM">VM</option>
+        </select>
+
+        <label for="editMacAddress">MAC-Adresse</label>
+        <input id="editMacAddress" type="text">
+
+        <label for="editOsVersion">OS</label>
+        <input id="editOsVersion" type="text">
+
+        <label for="editModel">Modell</label>
+        <input id="editModel" type="text">
+
+        <label for="editLocation">Standort</label>
+        <input id="editLocation" type="text">
+
+        <label for="editCurrentUsage">Verwendung</label>
+        <input id="editCurrentUsage" type="text">
+
+        <div class="modal-actions">
+            <button type="button" class="secondary-btn" onclick="closeSystemEditModal()">Abbrechen</button>
+            <button type="submit">Speichern</button>
+        </div>
+    </form>
+</div>
+
+<script src="app.js"></script>
+</body>
+</html>

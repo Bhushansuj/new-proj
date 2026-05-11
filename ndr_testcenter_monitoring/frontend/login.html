@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - NDR Testcenter Monitoring</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="login-body">
+
+<button class="theme-login-btn" onclick="toggleTheme()">Dark Mode</button>
+
+<main class="login-panel">
+    <h1>NDR Testcenter</h1>
+    <p>Bitte anmelden</p>
+
+    <form onsubmit="login(event)">
+        <label for="username">Benutzername</label>
+        <input id="username" type="text" autocomplete="username" required>
+
+        <label for="password">Passwort</label>
+        <input id="password" type="password" autocomplete="current-password" required>
+
+        <button type="submit">Anmelden</button>
+    </form>
+
+    <p id="loginError" class="error-text"></p>
+</main>
+
+<script src="app.js"></script>
+</body>
+</html>

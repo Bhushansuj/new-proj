@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NDR Testcenter Monitoring</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<aside class="sidebar">
+    <h2>NDR</h2>
+    <p>Testcenter Monitoring</p>
+    <nav>
+        <a href="index.html" class="active">Dashboard</a>
+        <a href="systems.html">Systeme</a>
+        <a href="reservations.html">Reservierungen</a>
+        <a href="users.html">Benutzer</a>
+        <a href="#" onclick="logout()">Logout</a>
+    </nav>
+</aside>
+
+<main class="main">
+    <header>
+        <div>
+            <h1>Dashboard</h1>
+            <p>Übersicht der Testsysteme im NDR-Testcenter</p>
+        </div>
+
+        <div class="header-actions">
+            <button onclick="toggleTheme()">Dark Mode</button>
+            <button onclick="exportSystemsCsv()">Export CSV</button>
+            <button onclick="checkStatus()">Status prüfen</button>
+        </div>
+    </header>
+
+    <section class="cards">
+        <div class="card">
+            <h3>Gesamt</h3>
+            <p id="totalSystems">0</p>
+        </div>
+
+        <div class="card online">
+            <h3>Online</h3>
+            <p id="onlineSystems">0</p>
+        </div>
+
+        <div class="card reserved">
+            <h3>Reserviert</h3>
+            <p id="reservedSystems">0</p>
+        </div>
+
+        <div class="card free">
+            <h3>Frei</h3>
+            <p id="freeSystems">0</p>
+        </div>
+    </section>
+
+    <section class="table-section">
+        <div class="table-header">
+            <h2>Systemübersicht</h2>
+            <div class="table-tools">
+                <div class="filter-buttons">
+                    <button class="filter-btn active" onclick="setDashboardFilter('all', this)">Alle</button>
+                    <button class="filter-btn" onclick="setDashboardFilter('free', this)">Frei</button>
+                    <button class="filter-btn" onclick="setDashboardFilter('reserved', this)">Reserviert</button>
+                    <button class="filter-btn" onclick="setDashboardFilter('online', this)">Online</button>
+                    <button class="filter-btn" onclick="setDashboardFilter('offline', this)">Offline</button>
+                </div>
+                <input type="text" id="searchInput" placeholder="System suchen..." onkeyup="filterSystems()">
+            </div>
+        </div>
+
+        <div class="table-scroll">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Hostname</th>
+                        <th>MAC-Adresse</th>
+                        <th>OS</th>
+                        <th>Modell</th>
+                        <th>Power</th>
+                        <th>Agent</th>
+                        <th>Aktion</th>
+                        <th>Entfernen</th>
+                    </tr>
+                </thead>
+                <tbody id="systemsTable" data-view="dashboard"></tbody>
+            </table>
+        </div>
+    </section>
+</main>
+
+<div id="reservationModal" class="modal hidden">
+    <form class="modal-content" onsubmit="submitReservation(event)">
+        <h2>System reservieren</h2>
+        <input type="hidden" id="reservationSystemId">
+
+        <label for="reservationUntil">Reserviert bis</label>
+        <input id="reservationUntil" type="datetime-local" required>
+
+        <label for="reservationPurpose">Zweck</label>
+        <input id="reservationPurpose" type="text" placeholder="z. B. Softwaretest" required>
+
+        <div class="modal-actions">
+            <button type="button" class="secondary-btn" onclick="closeReservationModal()">Abbrechen</button>
+            <button type="submit">Reservieren</button>
+        </div>
+    </form>
+</div>
+
+<script src="app.js"></script>
+</body>
+</html>

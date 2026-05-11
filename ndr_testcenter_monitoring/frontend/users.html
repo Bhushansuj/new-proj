@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Benutzer - NDR Testcenter Monitoring</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<aside class="sidebar">
+    <h2>NDR</h2>
+    <p>Testcenter Monitoring</p>
+    <nav>
+        <a href="index.html">Dashboard</a>
+        <a href="systems.html">Systeme</a>
+        <a href="reservations.html">Reservierungen</a>
+        <a href="users.html" class="active">Benutzer</a>
+        <a href="#" onclick="logout()">Logout</a>
+    </nav>
+</aside>
+
+<main class="main">
+    <header>
+        <div>
+            <h1>Benutzer</h1>
+            <p>Verwaltung der Benutzer und Rollen</p>
+        </div>
+        <div class="header-actions">
+            <button onclick="toggleTheme()">Dark Mode</button>
+        </div>
+    </header>
+
+    <section class="table-section">
+        <div class="table-header">
+            <h2>Benutzerverwaltung</h2>
+            <button onclick="openUserModal()">Neuer Benutzer</button>
+        </div>
+
+        <div class="table-scroll">
+            <table class="compact-table">
+                <thead>
+                    <tr>
+                        <th>Benutzername</th>
+                        <th>Rolle</th>
+                        <th>Löschen</th>
+                    </tr>
+                </thead>
+                <tbody id="usersTable">
+                    <tr>
+                        <td colspan="3">Benutzer werden über die API geladen.</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+</main>
+
+<div id="userModal" class="modal hidden">
+    <form class="modal-content" onsubmit="createUser(event)">
+        <h2>Benutzer hinzufügen</h2>
+
+        <label for="newUsername">Benutzername</label>
+        <input id="newUsername" type="text" required>
+
+        <label for="newPassword">Passwort</label>
+        <input id="newPassword" type="password" required>
+
+        <label for="newRole">Rolle</label>
+        <select id="newRole">
+            <option value="mitarbeiter">Mitarbeiter</option>
+            <option value="admin">Admin</option>
+        </select>
+
+        <div class="modal-actions">
+            <button type="button" class="secondary-btn" onclick="closeUserModal()">Abbrechen</button>
+            <button type="submit">Erstellen</button>
+        </div>
+    </form>
+</div>
+
+<script src="app.js"></script>
+</body>
+</html>
