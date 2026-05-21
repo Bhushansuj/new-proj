@@ -213,6 +213,7 @@ class AgentStatus(BaseModel):
     power_status: str = "online"
     usage_status: str = "busy"
     windows_version: Optional[str] = None
+    reinstalled_at: Optional[str] = None
     last_user: Optional[str] = None
     last_seen: Optional[str] = None
 
@@ -675,6 +676,17 @@ def receive_agent_status(status: AgentStatus, x_api_token: str = Header(default=
             last_seen,
         ),
     )
+
+    if status.reinstalled_at:
+        cursor.execute(
+            """
+            UPDATE systems
+            SET reinstalled_at = %s
+            WHERE id = %s
+            """,
+            (status.reinstalled_at, system["id"]),
+        )
+
     connection.commit()
 
     cursor.close()

@@ -1,4 +1,4 @@
-const API_URL = "http://127.0.0.1:8000";
+﻿const API_URL = "http://127.0.0.1:8000";
 
 let systemsData = [];
 let hiddenDashboardSystemIds = JSON.parse(
@@ -277,7 +277,7 @@ async function loadSystems() {
 
         if (!response.ok) {
             console.error("Systeme konnten nicht geladen werden:", await response.text());
-            alert("Status konnte nicht geprüft werden. Backend oder Datenbank prüfen.");
+            alert("Status konnte nicht geprÃ¼ft werden. Backend oder Datenbank prÃ¼fen.");
             return;
         }
 
@@ -292,7 +292,7 @@ async function loadSystems() {
 
 async function checkStatus() {
     await loadSystems();
-    alert("Status wurde geprüft.");
+    alert("Status wurde geprÃ¼ft.");
 }
 
 async function loadReservations() {
@@ -329,7 +329,7 @@ async function loadReservations() {
                     <td>${text(reservation.purpose)}</td>
                     <td>
                         <button class="delete-btn" onclick="deleteReservation(${reservation.id})">
-                            Löschen
+                            LÃ¶schen
                         </button>
                     </td>
                 </tr>
@@ -371,7 +371,7 @@ async function loadUsers() {
                     <td>${text(user.role_name)}</td>
                     <td>
                         <button class="delete-btn" onclick="deleteUser(${user.id})">
-                            Löschen
+                            LÃ¶schen
                         </button>
                     </td>
                 </tr>
@@ -454,7 +454,7 @@ function renderSystems(systems) {
             ? `<button class="release-btn" onclick="releaseSystem(${system.id})">Freigeben</button>`
             : `<button class="reserve-btn" onclick="reserveSystem(${system.id})">Reservieren</button>`;
         const deleteColumn = role === "admin"
-            ? `<td class="admin-only"><button class="delete-btn" onclick="deleteSystem(${system.id})">Löschen</button></td>`
+            ? `<td class="admin-only"><button class="delete-btn" onclick="deleteSystem(${system.id})">LÃ¶schen</button></td>`
             : "";
         const editColumn = role === "admin"
             ? `<td class="admin-only"><button class="secondary-btn small-btn" onclick="openSystemEditModal(${system.id})">Bearbeiten</button></td>`
@@ -474,11 +474,6 @@ function renderSystems(systems) {
                     </td>
                     <td><span class="agent ${agentClass}">${formatLastSeen(system.last_seen)}</span></td>
                     <td>${actionButton}</td>
-                    <td>
-                        <button class="delete-btn" onclick="removeFromDashboard(${system.id})">
-                            Entfernen
-                        </button>
-                    </td>
                 </tr>
             `;
             return;
@@ -503,7 +498,7 @@ function renderSystems(systems) {
                 ${deleteColumn}
                 <td>
                     <button class="icon-btn" onclick="toggleSystemDetails(${system.id})" aria-label="Details anzeigen">
-                        ▾
+                        â–¾
                     </button>
                 </td>
             </tr>
@@ -512,7 +507,9 @@ function renderSystems(systems) {
                     <div class="details-grid">
                         <div><strong>Typ</strong><span>${text(system.system_type)}</span></div>
                         <div><strong>Verwendung</strong><span>${text(system.current_usage)}</span></div>
+                        <div><strong>Windows / Build</strong><span>${text(system.windows_version)}</span></div>
                         <div><strong>Reserviert bis</strong><span>${formatDateTime(system.reserved_until)}</span></div>
+                        <div><strong>Aufgesetzt am</strong><span>${formatDateTime(system.reinstalled_at)}</span></div>
                         <div><strong>Letzter Benutzer</strong><span>${text(system.last_user)}</span></div>
                         <div><strong>Agent</strong><span>${formatLastSeen(system.last_seen)}</span></div>
                     </div>
@@ -708,7 +705,7 @@ async function togglePower(systemId) {
         const result = await response.json();
 
         if (!response.ok) {
-            alert(result.detail || "Power konnte nicht geändert werden");
+            alert(result.detail || "Power konnte nicht geÃ¤ndert werden");
             return;
         }
 
@@ -743,7 +740,7 @@ async function addSystem(event) {
         const result = await response.json();
 
         if (!response.ok) {
-            alert(result.detail || "System konnte nicht hinzugefügt werden");
+            alert(result.detail || "System konnte nicht hinzugefÃ¼gt werden");
             return;
         }
 
@@ -756,7 +753,7 @@ async function addSystem(event) {
 }
 
 async function deleteSystem(systemId) {
-    if (!confirm("Dieses System wirklich löschen?")) {
+    if (!confirm("Dieses System wirklich lÃ¶schen?")) {
         return;
     }
 
@@ -787,7 +784,7 @@ function removeFromDashboard(systemId) {
 }
 
 async function deleteReservation(reservationId) {
-    if (!confirm("Diese Reservierung wirklich löschen?")) {
+    if (!confirm("Diese Reservierung wirklich lÃ¶schen?")) {
         return;
     }
 
@@ -806,7 +803,7 @@ async function deleteReservation(reservationId) {
 }
 
 async function deleteUser(userId) {
-    if (!confirm("Diesen Benutzer wirklich löschen?")) {
+    if (!confirm("Diesen Benutzer wirklich lÃ¶schen?")) {
         return;
     }
 
@@ -846,3 +843,4 @@ loadSystems();
 loadReservations();
 loadUsers();
 setInterval(loadSystems, 5000);
+
